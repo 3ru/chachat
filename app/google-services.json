@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "835266113934",
+    "project_id": "chachat-35f93",
+    "storage_bucket": "chachat-35f93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835266113934:android:4201687f213dda5539f4df",
+        "android_client_info": {
+          "package_name": "Ryuya.uk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835266113934-kg0igvehfkqb81ogbbdsh9d4rfqjbu17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSj7J_ajG5Xi9f99VndViFrAjIIFk8Hz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835266113934-kg0igvehfkqb81ogbbdsh9d4rfqjbu17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
