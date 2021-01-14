@@ -1,5 +1,7 @@
-package Ryuya.uk
+package Ryuya.uk.messages
 
+import Ryuya.uk.R
+import Ryuya.uk.registerlogin.RegisterActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

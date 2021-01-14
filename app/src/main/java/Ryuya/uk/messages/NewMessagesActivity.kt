@@ -1,5 +1,8 @@
-package Ryuya.uk
+package Ryuya.uk.messages
 
+import Ryuya.uk.R
+import Ryuya.uk.models.User
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,9 +22,14 @@ class NewMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_messages)
 
-        supportActionBar?.title = "Select User"
+        supportActionBar?.title = "ユーザー選択"
         fetchUsers()
     }
+
+    companion object {
+        val USER_KEY = "USER_KEY"
+    }
+
 
     private fun fetchUsers() {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
@@ -36,6 +44,18 @@ class NewMessagesActivity : AppCompatActivity() {
                     if (user != null) {
                         adapter.add(UserItem(user))
                     }
+                }
+
+                adapter.setOnItemClickListener { item, view ->
+
+                    val userItem = item as UserItem
+
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
+
+                    finish()
+
                 }
 
                 recyclerview_newmessage.adapter = adapter

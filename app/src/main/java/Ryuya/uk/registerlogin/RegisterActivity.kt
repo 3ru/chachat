@@ -1,8 +1,10 @@
-package Ryuya.uk
+package Ryuya.uk.registerlogin
 
+import Ryuya.uk.R
+import Ryuya.uk.messages.LatestMessageActivity
+import Ryuya.uk.models.User
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
