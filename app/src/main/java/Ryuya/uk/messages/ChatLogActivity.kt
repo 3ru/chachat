@@ -71,13 +71,10 @@ class ChatLogActivity : AppCompatActivity() {
 
             override fun onCancelled(p0: DatabaseError) {
             }
-
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
             }
-
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {
             }
-
             override fun onChildRemoved(p0: DataSnapshot) {
             }
         })
@@ -85,7 +82,6 @@ class ChatLogActivity : AppCompatActivity() {
 
     private fun performSendMessage() {
         val text = edittext_chat_log.text.toString()
-
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(NewMessagesActivity.USER_KEY)
         val toId = user?.uid
@@ -94,7 +90,6 @@ class ChatLogActivity : AppCompatActivity() {
 
         val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
         val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
-
         val chatMessage = ChatMessage(reference.key!!, text, fromId, toId!!, System.currentTimeMillis() / 1000)
 
         reference.setValue(chatMessage)
@@ -106,7 +101,11 @@ class ChatLogActivity : AppCompatActivity() {
 
         toReference.setValue(chatMessage)
 
+        val latestMessageRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId")
+        latestMessageRef.setValue(chatMessage)
 
+        val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
+        latestMessageToRef.setValue(chatMessage)
     }
 }
 

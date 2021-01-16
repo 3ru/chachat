@@ -59,9 +59,6 @@ class RegisterActivity : AppCompatActivity() {
             selectphoto_imageview_register.setImageBitmap(bitmap)
             selectphoto_button_register.alpha = 0f
 
-//            val bitmapDrawable = BitmapDrawable(bitmap)
-//            selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
-
         }
     }
 
@@ -133,6 +130,3 @@ class RegisterActivity : AppCompatActivity() {
     }
 }
 
-//class User(val uid: String, val username: String, val profileImageUrl: String){
-//    constructor() : this( uid:"", username"", profileImageUrl:"")
-//}
