@@ -32,7 +32,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         app:civ_border_width="2dp"
-        app:civ_border_color="#bdd6e3"
+        app:civ_border_color="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />

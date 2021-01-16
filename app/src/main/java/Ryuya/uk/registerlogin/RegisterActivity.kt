@@ -27,16 +27,12 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         already_have_account_text_view.setOnClickListener{
-            Log.d("MainActivity", "Try to show login activity")
-
             //ログイン画面起動
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
         selectphoto_button_register.setOnClickListener{
-            Log.d("MainActivity", "Try to show photo selector")
-
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
@@ -49,11 +45,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            // なんの画像が選ばれたかチェック
-            Log.d("RegisterActivity", "Photo was selected")
-
             selectedPhotoUri = data.data
-
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
 
             selectphoto_imageview_register.setImageBitmap(bitmap)
@@ -71,20 +63,12 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        Log.d("MainActivity", "Email is: " + email)
-        Log.d("MainActivity", "Password: $password")
-
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener{
                 if (!it.isSuccessful) return@addOnCompleteListener
-
-                //success
-                Log.d("RegisterActivity", "Successfully created user with uid: ${it.result?.user?.uid}")
-
                 uploadImageToFirebaseStorage()
             }
             .addOnFailureListener{
-                Log.d("RegisterActivity", "Failed to create user: ${it.message}")
                 Toast.makeText(this, "登録に失敗しました: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
@@ -97,29 +81,21 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
-                Log.d("RegisterActivity", "Successfully updated image: ${it.metadata?.path}")
-
                 ref.downloadUrl.addOnSuccessListener {
-                    Log.d("RegisterActivity", "File Location: $it")
-
                     saveUserToFirebaseDatabase(it.toString())
                 }
             }
             .addOnFailureListener{
-
             }
     }
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-
         val user = User(uid, username_edittext_register.text.toString(), profileImageUrl)
 
         ref.setValue(user)
             .addOnSuccessListener {
-                Log.d("RegisterActivity", "Finally we saved the user to Firebase Database")
-
                 val intent = Intent(this, LatestMessageActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

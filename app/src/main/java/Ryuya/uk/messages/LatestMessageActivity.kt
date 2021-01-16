@@ -4,12 +4,14 @@ import Ryuya.uk.R
 import Ryuya.uk.models.ChatMessage
 import Ryuya.uk.models.User
 import Ryuya.uk.registerlogin.RegisterActivity
+import Ryuya.uk.views.LatestMessageRow
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
@@ -29,25 +31,21 @@ class LatestMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_latest_message)
 
         recyclerview_latest_messages.adapter = adapter
+        recyclerview_latest_messages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
+        adapter.setOnItemClickListener { item, view ->
+            val intent = Intent(this, ChatLogActivity::class.java)
+            val row = item as LatestMessageRow
+
+            intent.putExtra(NewMessagesActivity.USER_KEY, row.chatPartnerUser)
+            startActivity(intent)
+        }
         listenForLatestMessages()
         fetchCurrentUser()
         verifyUserIsLoggedIn()
     }
 
     val adapter = GroupAdapter<ViewHolder>()
-
-    class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
-        override fun bind(viewHolder: ViewHolder, position: Int) {
-            viewHolder.itemView.message_textview_latest_message.text = chatMessage.text
-        }
-
-        override fun getLayout(): Int {
-//            return com.google.firebase.database.R.layout.latest_message_row
-            return R.layout.latest_message_row
-        }
-    }
-
     val latestMessagesMap = HashMap<String, ChatMessage>()
 
     private fun refreshRecyclerViewMessages() {
@@ -90,7 +88,6 @@ class LatestMessageActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 currentUser = p0.getValue(User::class.java)
-                Log.d("LatestMessages", "Current user ${currentUser?.profileImageUrl}")
             }
 
             override fun onCancelled(p0: DatabaseError) {

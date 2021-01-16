@@ -21,7 +21,6 @@ class NewMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_messages)
-
         supportActionBar?.title = "ユーザー選択"
         fetchUsers()
     }
@@ -39,7 +38,6 @@ class NewMessagesActivity : AppCompatActivity() {
                 val adapter = GroupAdapter<ViewHolder>()
 
                 p0.children.forEach {
-                    Log.d("NewMessage", it.toString())
                     val user = it.getValue(User::class.java)
                     if (user != null) {
                         adapter.add(UserItem(user))
@@ -47,22 +45,16 @@ class NewMessagesActivity : AppCompatActivity() {
                 }
 
                 adapter.setOnItemClickListener { item, view ->
-
                     val userItem = item as UserItem
-
                     val intent = Intent(view.context, ChatLogActivity::class.java)
+
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
-
                     finish()
-
                 }
-
                 recyclerview_newmessage.adapter = adapter
             }
-
             override fun onCancelled(p0: DatabaseError) {
-
             }
         })
     }
@@ -71,7 +63,6 @@ class NewMessagesActivity : AppCompatActivity() {
 class UserItem(val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.username_textview_new_message.text = user.username
-
         Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.imageview_new_message)
     }
 
