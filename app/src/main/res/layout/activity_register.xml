@@ -18,7 +18,7 @@
         android:layout_marginRight="32dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
-        android:hint="Username"
+        android:hint="名前"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
-        android:hint="Email"
+        android:hint="メールアドレス"
         android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="@+id/username_edittext_register"
@@ -46,7 +46,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
-        android:hint="Password"
+        android:hint="パスワード"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="@+id/email_edittext_register"
@@ -93,7 +93,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_select_photo_button"
-        android:text="Select Photo"
+        android:text="画像を選択"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,12 +102,14 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/selectphoto_imageview_register"
-        app:civ_border_width="2dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/selectphoto_button_register"
         app:layout_constraintEnd_toEndOf="@+id/selectphoto_button_register"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/selectphoto_button_register"
-        app:layout_constraintTop_toTopOf="@+id/selectphoto_button_register" />
+        app:layout_constraintTop_toTopOf="@+id/selectphoto_button_register"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
