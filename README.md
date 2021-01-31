@@ -3,7 +3,7 @@ This is a simple chat application. It uses Firebase for account registration and
 
 ## Cloud Architecture  
 
-<img width= 500 src="Slides\cloud_architecture.png">
+<img width= 500 src="slides/cloud_architecture.png">
 
 | Function | Construction (All in Firebase) |
 | :--- | :---: |
